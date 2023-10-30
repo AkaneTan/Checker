@@ -19,7 +19,7 @@
     <string name="connectivity">Connectivity</string>
     <string name="connectivity_radio">Radio version</string>
     <string name="connectivity_gnss">GNSS HAL list</string>
-    <string name="connectivity_gnss_not_found">No GNSS hal found!!</string>
+    <string name="connectivity_gnss_not_found">No GNSS HAL found!!</string>
     <string name="media">Media</string>
     <string name="media_supported_hdr_types">Supported HDR types</string>
     <string name="media_wide_color_gamut">Wide color gamut</string>

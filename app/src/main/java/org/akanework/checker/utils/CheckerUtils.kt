@@ -42,8 +42,8 @@ object CheckerUtils {
         return outputLines
     }
 
-    fun checkGnssHal(): List<String> {
-        val command = "lshal | grep gnss"
+    fun checkHals(): List<String> {
+        val command = "lshal"
         return executeShellCommand(command)
     }
 

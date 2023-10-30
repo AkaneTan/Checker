@@ -197,7 +197,7 @@ class MainActivity : Activity() {
         // Set up radio info
         val connectivityRadioVersion = Build.getRadioVersion().substringAfterLast(',')
         val connectivityGNSSQueryJob = CoroutineScope(Dispatchers.Default).async {
-            val connectivityGNSSVersionRawList = CheckerUtils.checkGnssHal()
+            val connectivityGNSSVersionRawList = CheckerUtils.checkHals()
             val connectivityGNSSVersionList = connectivityGNSSVersionRawList
                 .filter { it.contains("android.hardware.gnss") }
                 .map {

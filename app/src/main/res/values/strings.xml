@@ -19,7 +19,7 @@
     <string name="connectivity">Connectivity</string>
     <string name="connectivity_radio">Radio version</string>
     <string name="connectivity_gnss">GNSS HAL list</string>
-    <string name="connectivity_gnss_not_found">No GNSS HAL found!!</string>
+    <string name="connectivity_gnss_not_found">No GNSS HIDL HAL found!!</string>
     <string name="media">Media</string>
     <string name="media_supported_hdr_types">Supported HDR types</string>
     <string name="media_wide_color_gamut">Wide color gamut</string>
@@ -36,4 +36,8 @@
     <string name="notice_summary">Consider reconfiguring your device tree or ROM.</string>
     <string name="security">Security</string>
     <string name="security_selinux_state">SELinux state</string>
+    <string name="media_not_granted">Not granted</string>
+    <string name="media_granted">Granted</string>
+    <string name="media_window_available">Window available</string>
+    <string name="media_window_unavailable">Window unavailable</string>
 </resources>

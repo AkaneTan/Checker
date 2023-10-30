@@ -2,6 +2,8 @@ package org.akanework.checker
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.pm.ActivityInfo.COLOR_MODE_WIDE_COLOR_GAMUT
 import android.graphics.ColorSpace
 import android.media.MediaDrm
@@ -205,7 +207,7 @@ class MainActivity : Activity() {
                 }
                 .distinct()
                 .joinToString(separator = "\n")
-            if (connectivityGNSSVersionRawList.isNotEmpty()) {
+            if (connectivityGNSSVersionList.isNotEmpty()) {
                 withContext(Dispatchers.Main) {
                     val anim = AlphaAnimation(1.0f, 0.0f)
                     anim.duration = 200
@@ -225,7 +227,8 @@ class MainActivity : Activity() {
                 }
             } else {
                 withContext(Dispatchers.Main) {
-                    abnormalitiesList.add(getString(R.string.abnormalities_gnss_hal_broken))
+                    connectivityGNSSHalStatus.text =
+                        getString(R.string.connectivity_gnss_not_found)
                 }
             }
         }
@@ -253,13 +256,14 @@ class MainActivity : Activity() {
         }
 
         val mediaHdrString = mediaHdrStringList.joinToString(separator = ", ")
-        val mediaIsDeviceColorGamut =
-            if (Build.VERSION.SDK_INT >= 26) ColorSpace.get(ColorSpace.Named.SRGB).isWideGamut else false
+        val mediaIsDeviceColorGamut = if (Build.VERSION.SDK_INT >= 26 && ColorSpace.get(ColorSpace.Named.SRGB).isWideGamut) getString(R.string.media_granted) else getString(R.string.media_not_granted)
+        val mediaIsGrantedGamut =
+            if (Build.VERSION.SDK_INT >= 26 && window.colorMode == COLOR_MODE_WIDE_COLOR_GAMUT) getString(R.string.media_window_available) else getString(R.string.media_window_unavailable)
 
         mediaHdrTypeTextView.text =
             "${getString(R.string.media_supported_hdr_types)} - $mediaHdrString"
         mediaWideColorGamutTextView.text =
-            "${getString(R.string.media_wide_color_gamut)} - $mediaIsDeviceColorGamut"
+            "${getString(R.string.media_wide_color_gamut)} - $mediaIsGrantedGamut ($mediaIsDeviceColorGamut)"
 
         // Set up security info
         val securitySELinuxQueryJob = CoroutineScope(Dispatchers.Default).async {

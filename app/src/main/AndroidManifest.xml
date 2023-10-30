@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="org.akanework.checker.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+        tools:node="remove" />
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -12,12 +14,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Checker">
-        <service
-            android:name=".services.LocationService"
-            android:enabled="true"
-            android:exported="true"
-            tools:ignore="ExportedService" />
+        android:theme="@style/Theme.Checker"
+        tools:targetApi="s">
         <activity
             android:name=".MainActivity"
             android:exported="true">

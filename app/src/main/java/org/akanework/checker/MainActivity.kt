@@ -2,8 +2,6 @@ package org.akanework.checker
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.pm.ActivityInfo.COLOR_MODE_WIDE_COLOR_GAMUT
 import android.graphics.ColorSpace
 import android.media.MediaDrm
@@ -39,6 +37,34 @@ class MainActivity : Activity() {
 
     companion object {
         val WIDEVINE_UUID = UUID(-0x121074568629b532L, -0x5c37d8232ae2de13L)
+        val TESTKEY =
+            "-----BEGIN CERTIFICATE-----\n" +
+            "MIIEqDCCA5CgAwIBAgIJAJNurL4H8gHfMA0GCSqGSIb3DQEBBQUAMIGUMQswCQYD\n" +
+            "VQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4g\n" +
+            "VmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UE\n" +
+            "AxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTAe\n" +
+            "Fw0wODAyMjkwMTMzNDZaFw0zNTA3MTcwMTMzNDZaMIGUMQswCQYDVQQGEwJVUzET\n" +
+            "MBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4G\n" +
+            "A1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9p\n" +
+            "ZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTCCASAwDQYJKoZI\n" +
+            "hvcNAQEBBQADggENADCCAQgCggEBANaTGQTexgskse3HYuDZ2CU+Ps1s6x3i/waM\n" +
+            "qOi8qM1r03hupwqnbOYOuw+ZNVn/2T53qUPn6D1LZLjk/qLT5lbx4meoG7+yMLV4\n" +
+            "wgRDvkxyGLhG9SEVhvA4oU6Jwr44f46+z4/Kw9oe4zDJ6pPQp8PcSvNQIg1QCAcy\n" +
+            "4ICXF+5qBTNZ5qaU7Cyz8oSgpGbIepTYOzEJOmc3Li9kEsBubULxWBjf/gOBzAzU\n" +
+            "RNps3cO4JFgZSAGzJWQTT7/emMkod0jb9WdqVA2BVMi7yge54kdVMxHEa5r3b97s\n" +
+            "zI5p58ii0I54JiCUP5lyfTwE/nKZHZnfm644oLIXf6MdW2r+6R8CAQOjgfwwgfkw\n" +
+            "HQYDVR0OBBYEFEhZAFY9JyxGrhGGBaR0GawJyowRMIHJBgNVHSMEgcEwgb6AFEhZ\n" +
+            "AFY9JyxGrhGGBaR0GawJyowRoYGapIGXMIGUMQswCQYDVQQGEwJVUzETMBEGA1UE\n" +
+            "CBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMH\n" +
+            "QW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAG\n" +
+            "CSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbYIJAJNurL4H8gHfMAwGA1Ud\n" +
+            "EwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADggEBAHqvlozrUMRBBVEY0NqrrwFbinZa\n" +
+            "J6cVosK0TyIUFf/azgMJWr+kLfcHCHJsIGnlw27drgQAvilFLAhLwn62oX6snb4Y\n" +
+            "LCBOsVMR9FXYJLZW2+TcIkCRLXWG/oiVHQGo/rWuWkJgU134NDEFJCJGjDbiLCpe\n" +
+            "+ZTWHdcwauTJ9pUbo8EvHRkU3cYfGmLaLfgn9gP+pWA7LFQNvXwBnDa6sppCccEX\n" +
+            "31I828XzgXpJ4O+mDL1/dBd+ek8ZPUP0IgdyZm5MTYPhvVqGCHzzTy3sIeJFymwr\n" +
+            "sBbmg2OAUNLEMO6nwmocSdN2ClirfxqCzJOLSDE4QyS9BAH6EhY6UFcOaE0=\n" +
+            "-----END CERTIFICATE-----"
     }
 
     private lateinit var titleTextView: TextView
@@ -49,6 +75,9 @@ class MainActivity : Activity() {
     private val abnormalitiesList = mutableListOf<String>()
     private val abnormalitiesAdapter = EntryAdapter(abnormalitiesList)
 
+    private var securityVerifiedBootState = "unknown"
+    private var securityLevel = 0
+
     private fun changeTitleStatus(status: Int) {
         var titleString = getString(R.string.normal_title)
         var summaryString = getString(R.string.normal_summary)
@@ -57,7 +86,7 @@ class MainActivity : Activity() {
 
         CoroutineScope(Dispatchers.Default).launch {
             when (status) {
-                1 -> {
+                0 -> {
                     targetColor = MaterialColors.harmonizeWithPrimary(
                         this@MainActivity,
                         getColor(R.color.green)
@@ -68,9 +97,22 @@ class MainActivity : Activity() {
                     )
                 }
 
-                2 -> {
+                1 -> {
                     titleString = getString(R.string.notice_title)
                     summaryString = getString(R.string.notice_summary)
+                    targetColor = MaterialColors.harmonizeWithPrimary(
+                        this@MainActivity,
+                        getColor(R.color.yellow)
+                    )
+                    targetTextColor = MaterialColors.harmonizeWithPrimary(
+                        this@MainActivity,
+                        getColor(R.color.colorOnYellow)
+                    )
+                }
+
+                2 -> {
+                    titleString = getString(R.string.critical_title)
+                    summaryString = getString(R.string.critical_summary)
                     targetColor = MaterialColors.getColor(
                         titleTextView,
                         com.google.android.material.R.attr.colorErrorContainer
@@ -98,6 +140,7 @@ class MainActivity : Activity() {
     @SuppressLint("SetTextI18n", "HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         if (Build.VERSION.SDK_INT >= 30) {
             window.setDecorFitsSystemWindows(false)
         }
@@ -125,6 +168,9 @@ class MainActivity : Activity() {
         headerCard = findViewById(R.id.header)
         headerCardFrame = findViewById(R.id.frame)
 
+        val architectureSocTextView = findViewById<TextView>(R.id.architecture_soc_version)
+        val architectureSupportedABITextView = findViewById<TextView>(R.id.architecture_supported)
+
         val basicAndroidVersionTextView = findViewById<TextView>(R.id.basic_android_version)
         val basicAndroidSdkLevelTextView = findViewById<TextView>(R.id.basic_sdk_level)
         val basicAndroidIdTextView = findViewById<TextView>(R.id.basic_android_id)
@@ -147,11 +193,22 @@ class MainActivity : Activity() {
         val mediaWideColorGamutTextView = findViewById<TextView>(R.id.media_wide_color_gamut)
 
         val securitySELinuxStateTextView = findViewById<TextView>(R.id.security_selinux_state)
+        val securityVerifiedBootStateTextView = findViewById<TextView>(R.id.security_verified_boot_state)
+        val securityAndroidSignatureTextView = findViewById<TextView>(R.id.security_system_signature)
 
         val abnormalitiesFrame = findViewById<MaterialCardView>(R.id.abnormal_frame)
         val abnormalitiesRecyclerView = findViewById<RecyclerView>(R.id.abnormal_recyclerview)
         abnormalitiesRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
         abnormalitiesRecyclerView.adapter = abnormalitiesAdapter
+
+        // Set up architecture info
+        architectureSocTextView.text = if (Build.VERSION.SDK_INT >= 31)
+            "${getString(R.string.architecture_soc_model)} - ${Build.SOC_MODEL}"
+        else
+            getString(R.string.architecture_failed_to_retrieve_soc)
+        architectureSupportedABITextView.text =
+            "${getString(R.string.architecture_supported_abi)} - ${Build.SUPPORTED_ABIS.joinToString(separator = ", ")}"
+
 
         // Set up basic info
         val basicAndroidVersion = Build.VERSION.RELEASE
@@ -227,8 +284,21 @@ class MainActivity : Activity() {
                 }
             } else {
                 withContext(Dispatchers.Main) {
-                    connectivityGNSSHalStatus.text =
-                        getString(R.string.connectivity_gnss_not_found)
+                    val anim = AlphaAnimation(1.0f, 0.0f)
+                    anim.duration = 200
+                    anim.repeatCount = 1
+                    anim.repeatMode = Animation.REVERSE
+
+                    anim.setAnimationListener(object : Animation.AnimationListener {
+                        override fun onAnimationEnd(animation: Animation?) {}
+                        override fun onAnimationStart(animation: Animation?) {}
+                        override fun onAnimationRepeat(animation: Animation?) {
+                            connectivityGNSSHalStatus.text =
+                                getString(R.string.connectivity_gnss_not_found)
+                        }
+                    })
+
+                    connectivityGNSSHalStatus.startAnimation(anim)
                 }
             }
         }
@@ -274,6 +344,7 @@ class MainActivity : Activity() {
                         0 -> "Enforcing"
                         1 -> {
                             abnormalitiesList.add(getString(R.string.abnormalities_selinux_not_enforcing))
+                            securityLevel = 2
                             "Permissive"
                         }
                         2 -> {
@@ -283,30 +354,69 @@ class MainActivity : Activity() {
                     }
             }
         }
+        val securityVerifiedBootStateQueryJob = CoroutineScope(Dispatchers.Default).async {
+            securityVerifiedBootState = SystemProperties.get("ro.boot.verifiedbootstate", "unknown")
+            if (securityVerifiedBootState != "green") {
+                abnormalitiesList.add(getString(R.string.abnormalities_verified_boot_stat))
+                if (securityLevel == 0) securityLevel = 1
+            }
+            withContext(Dispatchers.Main) {
+                securityVerifiedBootStateTextView.text =
+                    "${getString(R.string.security_verified_boot_state)} - $securityVerifiedBootState"
+            }
+        }
+        val securityAndroidSigningKeyQueryJob = CoroutineScope(Dispatchers.Default).async {
+            val buildTags = SystemProperties.get("ro.build.tags", "undefined")
+            var keyType: Int
+
+            var signingkey = "undefined"
+
+            if (buildTags.contains("test-keys")) {
+                abnormalitiesList.add(getString(R.string.abnormalities_signed_using_a_publickey))
+                securityLevel = 2
+                keyType = 0
+            } else if (buildTags.contains("release-keys") || buildTags.contains("dev-keys")) {
+                keyType = 1
+                if (buildTags.contains("dev-keys")) keyType = 2
+            } else {
+                abnormalitiesList.add(getString(R.string.abnormalities_undefined_signing_key))
+                securityLevel = 2
+                keyType = 3
+            }
+            when (keyType) {
+                0 -> signingkey = "test-keys"
+                1 -> signingkey = "release-keys"
+                2 -> signingkey = "dev-keys"
+                3 -> signingkey = "undefined"
+            }
+            withContext(Dispatchers.Main) {
+                securityAndroidSignatureTextView.text =
+                    "${getString(R.string.security_signing_key)} - $signingkey"
+            }
+        }
 
         // Get abnormalities
-        val verifiedBootStat = SystemProperties.read("ro.boot.verifiedbootstate", "unknown")
         val isDrmPassing =
             if (drmLevel == "L1") 0 else if (drmLevel == "L2") 1 else if (drmLevel == "L3") 2 else 3
 
         if (isDrmPassing != 0) {
             abnormalitiesList.add(getString(R.string.abnormalities_widevine))
-        }
-        if (verifiedBootStat != "green") {
-            abnormalitiesList.add(getString(R.string.abnormalities_verified_boot_stat))
+            if (securityLevel == 0) securityLevel = 1
         }
         if (connectivityRadioVersion == "unknown") {
             abnormalitiesList.add(getString(R.string.abnormalities_baseband_broken))
+            securityLevel = 2
         }
 
         CoroutineScope(Dispatchers.Default).launch {
-            awaitAll(connectivityGNSSQueryJob, securitySELinuxQueryJob)
+            awaitAll(
+                connectivityGNSSQueryJob,
+                securitySELinuxQueryJob,
+                securityVerifiedBootStateQueryJob,
+                securityAndroidSigningKeyQueryJob
+            )
             withContext(Dispatchers.Main) {
-                if (abnormalitiesList.isEmpty()) {
-                    changeTitleStatus(1)
-                } else {
-                    changeTitleStatus(2)
-                }
+                changeTitleStatus(securityLevel)
                 if (abnormalitiesList.size != 0) {
                     abnormalitiesAdapter.notifyItemRangeInserted(0, abnormalitiesList.size)
                     abnormalitiesFrame.visibility = View.VISIBLE

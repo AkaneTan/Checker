@@ -10,7 +10,7 @@ object SystemProperties {
     private const val GETPROP_EXECUTABLE_PATH = "/system/bin/getprop"
     private const val TAG = "Checker"
 
-    fun read(propName: String, defaultName: String): String {
+    fun get(propName: String, defaultName: String): String {
 
         var process: Process? = null
         var bufferedReader: BufferedReader? = null

@@ -29,7 +29,7 @@
             android:padding="18dp"
             tools:background="?attr/colorPrimaryContainer">
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:textSize="16sp"
                 tools:text="@string/normal_title" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/summary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="22dp">
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -104,7 +104,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="22dp">
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -113,7 +113,7 @@
                 android:textFontWeight="600"
                 android:textSize="20sp" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/basic_android_version"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -122,7 +122,7 @@
                 android:textFontWeight="500"
                 tools:text="Android version - " />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/basic_sdk_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                 android:textFontWeight="500"
                 tools:text="SDK Level - " />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/basic_android_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                 android:textSize="16sp"
                 tools:text="Android ID - " />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/basic_android_brand"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
                 android:textSize="16sp"
                 tools:text="Android ID - " />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/basic_android_model"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
                 android:textSize="16sp"
                 tools:text="Android ID - " />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/basic_model_sku"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -163,7 +163,7 @@
                 android:textSize="16sp"
                 tools:text="Android ID - " />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/basic_build_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -171,7 +171,7 @@
                 android:textSize="16sp"
                 tools:text="Android ID - " />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/basic_fingerprint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -200,7 +200,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="24dp">
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -209,7 +209,7 @@
                 android:textFontWeight="600"
                 android:textSize="20sp" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/connectivity_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -217,7 +217,7 @@
                 android:textSize="16sp"
                 tools:text="@string/connectivity_radio" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/connectivity_gps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -246,7 +246,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="24dp">
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -255,7 +255,7 @@
                 android:textFontWeight="600"
                 android:textSize="20sp" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/media_hdr_types"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -263,7 +263,7 @@
                 android:textSize="16sp"
                 tools:text="@string/connectivity_radio" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/media_wide_color_gamut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -292,7 +292,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="24dp">
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -301,7 +301,7 @@
                 android:textFontWeight="600"
                 android:textSize="20sp" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/security_selinux_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -331,7 +331,7 @@
             android:paddingEnd="18dp"
             android:paddingBottom="22dp">
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -340,7 +340,7 @@
                 android:textFontWeight="600"
                 android:textSize="20sp" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/widevine_hdcp_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -349,7 +349,7 @@
                 android:textSize="16sp"
                 tools:text="Version - 16.1.0" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/widevine_name_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -357,7 +357,7 @@
                 android:textSize="16sp"
                 tools:text="Version - 16.1.0" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/widevine_vendor_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -365,7 +365,7 @@
                 android:textSize="16sp"
                 tools:text="Version - 16.1.0" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/widevine_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -373,7 +373,7 @@
                 android:textSize="16sp"
                 tools:text="Version - 16.1.0" />
 
-            <TextView
+            <org.akanework.checker.ui.TrimmedTextView
                 android:id="@+id/widevine_algo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

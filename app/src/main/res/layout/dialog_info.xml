@@ -19,14 +19,14 @@
         android:layout_marginStart="16dp"
         android:orientation="vertical">
 
-        <TextView
+        getString(
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textColor="?attr/colorOnSurface"
             android:textSize="18sp" />
 
-        <TextView
+        <org.akanework.checker.ui.TrimmedTextView
             android:id="@+id/version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
             android:textColor="?attr/colorOnSurfaceVariant"
             android:textSize="16sp" />
 
-        <TextView
+        <org.akanework.checker.ui.TrimmedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"

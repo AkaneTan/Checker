@@ -192,7 +192,7 @@ class MainActivity : Activity() {
         CoroutineScope(Dispatchers.Default).launch {
             val connectivityGnssVersionRawList = CheckerUtils.checkGnssHal()
             val connectivityGnssVersionList = connectivityGnssVersionRawList
-                .filter { it.contains("android.hardware.gnss@") }
+                .filter { it.contains("android.hardware.gnss") }
                 .joinToString(separator = "\n") {
                     it.substringBefore(":").substringAfterLast("? ").trim()
                 }

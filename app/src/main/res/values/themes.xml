@@ -1,0 +1,18 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Checker" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">@bool/lightStatusBarContent</item>
+        <item name="fontFamily">sans-serif</item>
+    </style>
+
+    <style name="CheckerDialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
+        <item name="android:background">?attr/colorSurface</item>
+        <item name="dialogCornerRadius">8dp</item>
+    </style>
+
+    <style name="Theme.Checker" parent="Base.Theme.Checker" />
+</resources>

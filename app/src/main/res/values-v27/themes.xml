@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="V27.Theme.Checker" parent="Base.Theme.Checker">
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <style name="Theme.Checker" parent="V27.Theme.Checker" />
+
+</resources>

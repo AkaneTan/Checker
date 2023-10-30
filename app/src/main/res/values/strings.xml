@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Checker</string>
+    <string name="more">more</string>
+    <string name="widevine">Widevine</string>
+    <string name="drm_security_level">Security Level</string>
+    <string name="drm_version">Version</string>
+    <string name="drm_vendor">Vendor</string>
+    <string name="drm_desc">Description</string>
+    <string name="drm_algo">Algorithm</string>
+    <string name="basic">Basic</string>
+    <string name="basic_android_version">Android version</string>
+    <string name="basic_android_sdk">SDK Level</string>
+    <string name="basic_android_id">Android ID</string>
+    <string name="basic_brand">Brand</string>
+    <string name="basic_model">Model</string>
+    <string name="basic_model_sku">SKU</string>
+    <string name="basic_build_type">Build type</string>
+    <string name="basic_build_fingerprint">Build fingerprint</string>
+    <string name="connectivity">Connectivity</string>
+    <string name="connectivity_radio">Radio version</string>
+    <string name="connectivity_gnss">GNSS HAL list</string>
+    <string name="connectivity_gnss_not_found">No GNSS hal found!!</string>
+    <string name="media">Media</string>
+    <string name="media_supported_hdr_types">Supported HDR types</string>
+    <string name="media_wide_color_gamut">Wide color gamut</string>
+    <string name="abnormalities">Abnormalities</string>
+    <string name="abnormalities_widevine">Widevine protection is software based.</string>
+    <string name="abnormalities_verified_boot_stat">Abnormalities found in Verified boot state.</string>
+    <string name="abnormalities_baseband_broken">Baseband is broken.</string>
+    <string name="abnormalities_gnss_hal_broken">GNSS Hal is broken.</string>
+    <string name="github">Open-sourced under GPL-3.0.\nCopyright © AkaneTan 2023</string>
+    <string name="normal_title">No abnomilities found.</string>
+    <string name="normal_summary">You\'re running a sane build.</string>
+    <string name="notice_title">Abnormalities found.</string>
+    <string name="notice_summary">Consider reconfiguring your device tree or ROM.</string>
+</resources>

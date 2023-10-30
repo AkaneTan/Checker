@@ -24,6 +24,8 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.color.MaterialColors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.akanework.checker.utils.CheckerUtils
@@ -43,6 +45,7 @@ class MainActivity : Activity() {
     private lateinit var headerCardFrame: MaterialCardView
 
     private val abnormalitiesList = mutableListOf<String>()
+    private val abnormalitiesAdapter = EntryAdapter(abnormalitiesList)
 
     private fun changeTitleStatus(status: Int) {
         var titleString = getString(R.string.normal_title)
@@ -136,13 +139,17 @@ class MainActivity : Activity() {
         val widevineAlgoTextView = findViewById<TextView>(R.id.widevine_algo)
 
         val connectivityRadioTextView = findViewById<TextView>(R.id.connectivity_radio)
-        val connectivityGnssHalStatus = findViewById<TextView>(R.id.connectivity_gps)
+        val connectivityGNSSHalStatus = findViewById<TextView>(R.id.connectivity_gps)
 
         val mediaHdrTypeTextView = findViewById<TextView>(R.id.media_hdr_types)
         val mediaWideColorGamutTextView = findViewById<TextView>(R.id.media_wide_color_gamut)
 
+        val securitySELinuxStateTextView = findViewById<TextView>(R.id.security_selinux_state)
+
         val abnormalitiesFrame = findViewById<MaterialCardView>(R.id.abnormal_frame)
         val abnormalitiesRecyclerView = findViewById<RecyclerView>(R.id.abnormal_recyclerview)
+        abnormalitiesRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
+        abnormalitiesRecyclerView.adapter = abnormalitiesAdapter
 
         // Set up basic info
         val basicAndroidVersion = Build.VERSION.RELEASE
@@ -189,14 +196,16 @@ class MainActivity : Activity() {
 
         // Set up radio info
         val connectivityRadioVersion = Build.getRadioVersion().substringAfterLast(',')
-        CoroutineScope(Dispatchers.Default).launch {
-            val connectivityGnssVersionRawList = CheckerUtils.checkGnssHal()
-            val connectivityGnssVersionList = connectivityGnssVersionRawList
+        val connectivityGNSSQueryJob = CoroutineScope(Dispatchers.Default).async {
+            val connectivityGNSSVersionRawList = CheckerUtils.checkGnssHal()
+            val connectivityGNSSVersionList = connectivityGNSSVersionRawList
                 .filter { it.contains("android.hardware.gnss") }
-                .joinToString(separator = "\n") {
-                    it.substringBefore(":").substringAfterLast("? ").trim()
+                .map {
+                    it.substringBefore(":").substringAfterLast("? ").substringAfterLast("Y ").trim()
                 }
-            if (connectivityGnssVersionRawList.isNotEmpty()) {
+                .distinct()
+                .joinToString(separator = "\n")
+            if (connectivityGNSSVersionRawList.isNotEmpty()) {
                 withContext(Dispatchers.Main) {
                     val anim = AlphaAnimation(1.0f, 0.0f)
                     anim.duration = 200
@@ -207,26 +216,17 @@ class MainActivity : Activity() {
                         override fun onAnimationEnd(animation: Animation?) {}
                         override fun onAnimationStart(animation: Animation?) {}
                         override fun onAnimationRepeat(animation: Animation?) {
-                            connectivityGnssHalStatus.text =
-                                "${getString(R.string.connectivity_gnss)}\n$connectivityGnssVersionList"
+                            connectivityGNSSHalStatus.text =
+                                "${getString(R.string.connectivity_gnss)}\n$connectivityGNSSVersionList"
                         }
                     })
 
-                    connectivityGnssHalStatus.startAnimation(anim)
+                    connectivityGNSSHalStatus.startAnimation(anim)
                 }
             } else {
                 withContext(Dispatchers.Main) {
                     abnormalitiesList.add(getString(R.string.abnormalities_gnss_hal_broken))
-                    val abnormalitiesAdapter = EntryAdapter(abnormalitiesList)
-                    abnormalitiesRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
-                    abnormalitiesRecyclerView.adapter = abnormalitiesAdapter
-                    abnormalitiesFrame.visibility = View.VISIBLE
                 }
-            }
-            if (abnormalitiesList.isEmpty()) {
-                changeTitleStatus(1)
-            } else {
-                changeTitleStatus(2)
             }
         }
         connectivityRadioTextView.text =
@@ -261,6 +261,25 @@ class MainActivity : Activity() {
         mediaWideColorGamutTextView.text =
             "${getString(R.string.media_wide_color_gamut)} - $mediaIsDeviceColorGamut"
 
+        // Set up security info
+        val securitySELinuxQueryJob = CoroutineScope(Dispatchers.Default).async {
+            val securityIsSELinuxEnforcing = CheckerUtils.isSELinuxEnforcing()
+            withContext(Dispatchers.Main) {
+                securitySELinuxStateTextView.text = getString(R.string.security_selinux_state) + " - " +
+                    when (securityIsSELinuxEnforcing) {
+                        0 -> "Enforcing"
+                        1 -> {
+                            abnormalitiesList.add(getString(R.string.abnormalities_selinux_not_enforcing))
+                            "Permissive"
+                        }
+                        2 -> {
+                            "Invalid"
+                        }
+                        else -> throw IllegalArgumentException()
+                    }
+            }
+        }
+
         // Get abnormalities
         val verifiedBootStat = SystemProperties.read("ro.boot.verifiedbootstate", "unknown")
         val isDrmPassing =
@@ -276,11 +295,19 @@ class MainActivity : Activity() {
             abnormalitiesList.add(getString(R.string.abnormalities_baseband_broken))
         }
 
-        if (abnormalitiesList.size != 0) {
-            val abnormalitiesAdapter = EntryAdapter(abnormalitiesList)
-            abnormalitiesRecyclerView.layoutManager = LinearLayoutManager(this)
-            abnormalitiesRecyclerView.adapter = abnormalitiesAdapter
-            abnormalitiesFrame.visibility = View.VISIBLE
+        CoroutineScope(Dispatchers.Default).launch {
+            awaitAll(connectivityGNSSQueryJob, securitySELinuxQueryJob)
+            withContext(Dispatchers.Main) {
+                if (abnormalitiesList.isEmpty()) {
+                    changeTitleStatus(1)
+                } else {
+                    changeTitleStatus(2)
+                }
+                if (abnormalitiesList.size != 0) {
+                    abnormalitiesAdapter.notifyItemRangeInserted(0, abnormalitiesList.size)
+                    abnormalitiesFrame.visibility = View.VISIBLE
+                }
+            }
         }
     }
 

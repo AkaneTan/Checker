@@ -28,9 +28,12 @@
     <string name="abnormalities_verified_boot_stat">Abnormalities found in Verified boot state.</string>
     <string name="abnormalities_baseband_broken">Baseband is broken.</string>
     <string name="abnormalities_gnss_hal_broken">GNSS Hal is broken.</string>
+    <string name="abnormalities_selinux_not_enforcing">SELinux is not enforcing.</string>
     <string name="github">Open-sourced under GPL-3.0.\nCopyright © AkaneTan 2023</string>
     <string name="normal_title">No abnomilities found.</string>
     <string name="normal_summary">You\'re running a sane build.</string>
     <string name="notice_title">Abnormalities found.</string>
     <string name="notice_summary">Consider reconfiguring your device tree or ROM.</string>
+    <string name="security">Security</string>
+    <string name="security_selinux_state">SELinux state</string>
 </resources>

@@ -1,29 +1,56 @@
 package org.akanework.checker.utils
 
+import android.util.Log
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
 object CheckerUtils {
 
-    fun checkGnssHal(): MutableList<String> {
+    private val commandCache = mutableMapOf<String, List<String>>()
+
+    private fun executeShellCommand(command: String): List<String> {
+        // Check if the result is already cached
+        if (commandCache.containsKey(command)) {
+            return commandCache[command]!!
+        }
+
+        val outputLines = mutableListOf<String>()
+
         try {
-            val command = "lshal | grep gnss"
-            val process = Runtime.getRuntime().exec(arrayOf("sh", "-c", command))
+            val processBuilder = ProcessBuilder("sh", "-c", command)
+            val process = processBuilder.start()
             val reader = BufferedReader(InputStreamReader(process.inputStream))
+            val errorReader = BufferedReader(InputStreamReader(process.errorStream))
             var line: String?
 
-            val gnssList = mutableListOf<String>()
             while (reader.readLine().also { line = it } != null) {
-                line?.let { gnssList.add(it) }
+                line?.let { outputLines.add(it) }
+            }
+
+            while (errorReader.readLine().also { line = it } != null) {
+                // Handle errors if needed
             }
 
             process.waitFor()
-            return gnssList
-
         } catch (e: Exception) {
             e.printStackTrace()
-            return mutableListOf()
         }
+
+        // Cache the result for future use
+        commandCache[command] = outputLines
+
+        return outputLines
     }
 
+    fun checkGnssHal(): List<String> {
+        val command = "lshal | grep gnss"
+        return executeShellCommand(command)
+    }
+
+    fun isSELinuxEnforcing(): Int {
+        val command = "lshal"
+        val output = executeShellCommand(command)
+        Log.d("TAG", output.toString())
+        return if (output.joinToString().contains(" Y ")) 1 else 0
+    }
 }

@@ -119,6 +119,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
+                android:textFontWeight="500"
                 tools:text="Android version - " />
 
             <TextView
@@ -127,6 +128,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
+                android:textFontWeight="500"
                 tools:text="SDK Level - " />
 
             <TextView
@@ -212,7 +214,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnSurface"
-                android:textFontWeight="500"
                 android:textSize="16sp"
                 tools:text="@string/connectivity_radio" />
 
@@ -222,7 +223,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/connectivity_gnss_not_found"
                 android:textColor="?attr/colorOnSurface"
-                android:textFontWeight="500"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -260,7 +260,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnSurface"
-                android:textFontWeight="500"
                 android:textSize="16sp"
                 tools:text="@string/connectivity_radio" />
 
@@ -269,7 +268,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnSurface"
-                android:textFontWeight="500"
                 android:textSize="16sp"
                 tools:text="@string/connectivity_radio" />
 

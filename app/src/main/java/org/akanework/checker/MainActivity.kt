@@ -358,7 +358,7 @@ class MainActivity : Activity() {
 
             if (buildTags.contains("test-keys")) {
                 abnormalitiesList.add(getString(R.string.abnormalities_signed_using_a_publickey))
-                securityLevel = 2
+                if (securityLevel == 0) securityLevel = 1
                 keyType = 0
             } else if (buildTags.contains("release-keys") || buildTags.contains("dev-keys")) {
                 keyType = 1

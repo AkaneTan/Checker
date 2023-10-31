@@ -37,34 +37,6 @@ class MainActivity : Activity() {
 
     companion object {
         val WIDEVINE_UUID = UUID(-0x121074568629b532L, -0x5c37d8232ae2de13L)
-        val TESTKEY =
-            "-----BEGIN CERTIFICATE-----\n" +
-            "MIIEqDCCA5CgAwIBAgIJAJNurL4H8gHfMA0GCSqGSIb3DQEBBQUAMIGUMQswCQYD\n" +
-            "VQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4g\n" +
-            "VmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UE\n" +
-            "AxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTAe\n" +
-            "Fw0wODAyMjkwMTMzNDZaFw0zNTA3MTcwMTMzNDZaMIGUMQswCQYDVQQGEwJVUzET\n" +
-            "MBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4G\n" +
-            "A1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9p\n" +
-            "ZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTCCASAwDQYJKoZI\n" +
-            "hvcNAQEBBQADggENADCCAQgCggEBANaTGQTexgskse3HYuDZ2CU+Ps1s6x3i/waM\n" +
-            "qOi8qM1r03hupwqnbOYOuw+ZNVn/2T53qUPn6D1LZLjk/qLT5lbx4meoG7+yMLV4\n" +
-            "wgRDvkxyGLhG9SEVhvA4oU6Jwr44f46+z4/Kw9oe4zDJ6pPQp8PcSvNQIg1QCAcy\n" +
-            "4ICXF+5qBTNZ5qaU7Cyz8oSgpGbIepTYOzEJOmc3Li9kEsBubULxWBjf/gOBzAzU\n" +
-            "RNps3cO4JFgZSAGzJWQTT7/emMkod0jb9WdqVA2BVMi7yge54kdVMxHEa5r3b97s\n" +
-            "zI5p58ii0I54JiCUP5lyfTwE/nKZHZnfm644oLIXf6MdW2r+6R8CAQOjgfwwgfkw\n" +
-            "HQYDVR0OBBYEFEhZAFY9JyxGrhGGBaR0GawJyowRMIHJBgNVHSMEgcEwgb6AFEhZ\n" +
-            "AFY9JyxGrhGGBaR0GawJyowRoYGapIGXMIGUMQswCQYDVQQGEwJVUzETMBEGA1UE\n" +
-            "CBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMH\n" +
-            "QW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAG\n" +
-            "CSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbYIJAJNurL4H8gHfMAwGA1Ud\n" +
-            "EwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADggEBAHqvlozrUMRBBVEY0NqrrwFbinZa\n" +
-            "J6cVosK0TyIUFf/azgMJWr+kLfcHCHJsIGnlw27drgQAvilFLAhLwn62oX6snb4Y\n" +
-            "LCBOsVMR9FXYJLZW2+TcIkCRLXWG/oiVHQGo/rWuWkJgU134NDEFJCJGjDbiLCpe\n" +
-            "+ZTWHdcwauTJ9pUbo8EvHRkU3cYfGmLaLfgn9gP+pWA7LFQNvXwBnDa6sppCccEX\n" +
-            "31I828XzgXpJ4O+mDL1/dBd+ek8ZPUP0IgdyZm5MTYPhvVqGCHzzTy3sIeJFymwr\n" +
-            "sBbmg2OAUNLEMO6nwmocSdN2ClirfxqCzJOLSDE4QyS9BAH6EhY6UFcOaE0=\n" +
-            "-----END CERTIFICATE-----"
     }
 
     private lateinit var titleTextView: TextView
@@ -144,9 +116,6 @@ class MainActivity : Activity() {
         if (Build.VERSION.SDK_INT >= 30) {
             window.setDecorFitsSystemWindows(false)
         }
-        if (Build.VERSION.SDK_INT >= 26) {
-            window.colorMode = COLOR_MODE_WIDE_COLOR_GAMUT
-        }
         setContentView(R.layout.activity_main)
 
         val topAppBar = findViewById<MaterialToolbar>(R.id.topAppBar)
@@ -196,6 +165,10 @@ class MainActivity : Activity() {
         val securityVerifiedBootStateTextView = findViewById<TextView>(R.id.security_verified_boot_state)
         val securityAndroidSignatureTextView = findViewById<TextView>(R.id.security_system_signature)
 
+        val universalityTrebleTextView = findViewById<TextView>(R.id.universality_treble_support)
+        val universalityGSITextView = findViewById<TextView>(R.id.universality_gsi_support)
+        val universalityDSUTextView = findViewById<TextView>(R.id.universality_dsu_support)
+
         val abnormalitiesFrame = findViewById<MaterialCardView>(R.id.abnormal_frame)
         val abnormalitiesRecyclerView = findViewById<RecyclerView>(R.id.abnormal_recyclerview)
         abnormalitiesRecyclerView.layoutManager = LinearLayoutManager(this@MainActivity)
@@ -240,18 +213,30 @@ class MainActivity : Activity() {
             "${getString(R.string.basic_build_fingerprint)} - $basicFingerprint"
 
         // Set up widevine info
-        val widevineKeyDrm = MediaDrm(WIDEVINE_UUID)
-        val drmLevel = widevineKeyDrm.getPropertyString("securityLevel")
-        val drmVersion = widevineKeyDrm.getPropertyString(PROPERTY_VERSION)
-        val drmVendorLevel = widevineKeyDrm.getPropertyString(PROPERTY_VENDOR)
-        val drmDesc = widevineKeyDrm.getPropertyString(PROPERTY_DESCRIPTION)
-        val drmAlgo = widevineKeyDrm.getPropertyString(PROPERTY_ALGORITHMS)
+        val widevineVersionQueryJob = CoroutineScope(Dispatchers.Default).async {
+            val widevineKeyDrm = MediaDrm(WIDEVINE_UUID)
+            val drmLevel = widevineKeyDrm.getPropertyString("securityLevel")
+            val drmVersion = widevineKeyDrm.getPropertyString(PROPERTY_VERSION)
+            val drmVendorLevel = widevineKeyDrm.getPropertyString(PROPERTY_VENDOR)
+            val drmDesc = widevineKeyDrm.getPropertyString(PROPERTY_DESCRIPTION)
+            val drmAlgo = widevineKeyDrm.getPropertyString(PROPERTY_ALGORITHMS)
 
-        widevineLevelTextView.text = "${getString(R.string.drm_security_level)} - $drmLevel"
-        widevineVersionLevelTextView.text = "${getString(R.string.drm_version)} - $drmVersion"
-        widevineVendorLevelTextView.text = "${getString(R.string.drm_vendor)} - $drmVendorLevel"
-        widevineDescTextView.text = "${getString(R.string.drm_desc)} - $drmDesc"
-        widevineAlgoTextView.text = "${getString(R.string.drm_algo)} - $drmAlgo"
+            val isDrmPassing =
+                if (drmLevel == "L1") 0 else if (drmLevel == "L2") 1 else if (drmLevel == "L3") 2 else 3
+
+            if (isDrmPassing != 0) {
+                abnormalitiesList.add(getString(R.string.abnormalities_widevine))
+                if (securityLevel == 0) securityLevel = 1
+            }
+
+            withContext(Dispatchers.Main) {
+                widevineLevelTextView.text = "${getString(R.string.drm_security_level)} - $drmLevel"
+                widevineVersionLevelTextView.text = "${getString(R.string.drm_version)} - $drmVersion"
+                widevineVendorLevelTextView.text = "${getString(R.string.drm_vendor)} - $drmVendorLevel"
+                widevineDescTextView.text = "${getString(R.string.drm_desc)} - $drmDesc"
+                widevineAlgoTextView.text = "${getString(R.string.drm_algo)} - $drmAlgo"
+            }
+        }
 
         // Set up radio info
         val connectivityRadioVersion = Build.getRadioVersion().substringAfterLast(',')
@@ -366,7 +351,7 @@ class MainActivity : Activity() {
             }
         }
         val securityAndroidSigningKeyQueryJob = CoroutineScope(Dispatchers.Default).async {
-            val buildTags = SystemProperties.get("ro.build.tags", "undefined")
+            val buildTags = SystemProperties.get("ro.system.build.fingerprint", "undefined")
             var keyType: Int
 
             var signingkey = "undefined"
@@ -395,14 +380,26 @@ class MainActivity : Activity() {
             }
         }
 
-        // Get abnormalities
-        val isDrmPassing =
-            if (drmLevel == "L1") 0 else if (drmLevel == "L2") 1 else if (drmLevel == "L3") 2 else 3
-
-        if (isDrmPassing != 0) {
-            abnormalitiesList.add(getString(R.string.abnormalities_widevine))
-            if (securityLevel == 0) securityLevel = 1
+        // Set up universality info
+        val universalityTrebleQueryJob = CoroutineScope(Dispatchers.Default).async {
+            val isTrebleSupported = SystemProperties.get("ro.treble.enabled", "false")
+            withContext(Dispatchers.Main) {
+                universalityTrebleTextView.text =
+                    "${getString(R.string.universality_treble_support)} - $isTrebleSupported"
+                universalityGSITextView.text =
+                    if (isTrebleSupported == "true")
+                        "${getString(R.string.universality_gsi_compatibility)} - ${getString(R.string.available)} (Treble)"
+                    else
+                        "${getString(R.string.universality_gsi_compatibility)} - ${getString(R.string.unavailable)}"
+            }
         }
+        universalityDSUTextView.text =
+            if (Build.VERSION.SDK_INT >= 31)
+                "${getString(R.string.universality_dsu_status)} - ${getString(R.string.available)}"
+            else
+                "${getString(R.string.universality_dsu_status)} - ${getString(R.string.unavailable)}"
+
+        // Get abnormalities
         if (connectivityRadioVersion == "unknown") {
             abnormalitiesList.add(getString(R.string.abnormalities_baseband_broken))
             securityLevel = 2
@@ -413,7 +410,9 @@ class MainActivity : Activity() {
                 connectivityGNSSQueryJob,
                 securitySELinuxQueryJob,
                 securityVerifiedBootStateQueryJob,
-                securityAndroidSigningKeyQueryJob
+                securityAndroidSigningKeyQueryJob,
+                universalityTrebleQueryJob,
+                widevineVersionQueryJob
             )
             withContext(Dispatchers.Main) {
                 changeTitleStatus(securityLevel)

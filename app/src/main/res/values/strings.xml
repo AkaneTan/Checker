@@ -25,9 +25,9 @@
     <string name="media_wide_color_gamut">Wide color gamut</string>
     <string name="abnormalities">Abnormalities</string>
     <string name="abnormalities_widevine">Widevine protection is software based.</string>
-    <string name="abnormalities_verified_boot_stat">Abnormalities found in Verified boot state.</string>
+    <string name="abnormalities_verified_boot_stat">Abnormalities found in verified boot state.</string>
     <string name="abnormalities_baseband_broken">Baseband is broken.</string>
-    <string name="abnormalities_gnss_hal_broken">GNSS Hal is broken.</string>
+    <string name="abnormalities_gnss_hal_broken">GNSS HAL is broken.</string>
     <string name="abnormalities_selinux_not_enforcing">SELinux is not enforcing.</string>
     <string name="abnormalities_signed_using_a_publickey">Your build is signed using a public key.</string>
     <string name="abnormalities_undefined_signing_key">Your build tag doesn\'t contain a signing key.</string>
@@ -51,4 +51,10 @@
     <string name="architecture_soc_model">SoC model</string>
     <string name="architecture_failed_to_retrieve_soc">Failed to retrieve SoC model!</string>
     <string name="architecture_supported_abi">Supported ABIs</string>
+    <string name="universality">Universality</string>
+    <string name="universality_treble_support">Treble status</string>
+    <string name="universality_gsi_compatibility">GSI Compatibility</string>
+    <string name="available">Available</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="universality_dsu_status">DSU Status</string>
 </resources>

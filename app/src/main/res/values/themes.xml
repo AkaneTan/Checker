@@ -6,6 +6,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">@bool/lightStatusBarContent</item>
+        <item name="android:windowBackground">@color/ic_launcher_background</item>
         <item name="fontFamily">sans-serif</item>
         <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
     </style>

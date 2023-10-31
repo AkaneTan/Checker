@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">校验者</string>
-    <string name="more">更多</string>
+    <string name="about">关于</string>
     <string name="widevine">Widevine</string>
     <string name="drm_security_level">安全等級</string>
     <string name="drm_version">版本</string>

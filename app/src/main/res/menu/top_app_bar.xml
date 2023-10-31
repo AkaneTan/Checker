@@ -5,6 +5,6 @@
         android:id="@+id/more"
         android:icon="@drawable/ic_more_vert"
         android:iconTint="?attr/colorOnSurface"
-        android:title="@string/more"
-        app:showAsAction="ifRoom" />
+        android:title="@string/about"
+        app:showAsAction="never" />
 </menu>

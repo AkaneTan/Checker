@@ -3,6 +3,7 @@ package org.akanework.checker
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.ActivityInfo.COLOR_MODE_WIDE_COLOR_GAMUT
+import android.content.res.Configuration
 import android.graphics.ColorSpace
 import android.media.MediaDrm
 import android.media.MediaDrm.PROPERTY_ALGORITHMS
@@ -311,14 +312,13 @@ class MainActivity : Activity() {
         }
 
         val mediaHdrString = mediaHdrStringList.joinToString(separator = ", ")
-        val mediaIsDeviceColorGamut = if (Build.VERSION.SDK_INT >= 26 && ColorSpace.get(ColorSpace.Named.SRGB).isWideGamut) getString(R.string.media_granted) else getString(R.string.media_not_granted)
         val mediaIsGrantedGamut =
-            if (Build.VERSION.SDK_INT >= 26 && window.colorMode == COLOR_MODE_WIDE_COLOR_GAMUT) getString(R.string.media_window_available) else getString(R.string.media_window_unavailable)
+            if (Build.VERSION.SDK_INT >= 26 && Configuration().isScreenWideColorGamut) getString(R.string.media_window_available) else getString(R.string.media_window_unavailable)
 
         mediaHdrTypeTextView.text =
             "${getString(R.string.media_supported_hdr_types)} - $mediaHdrString"
         mediaWideColorGamutTextView.text =
-            "${getString(R.string.media_wide_color_gamut)} - $mediaIsGrantedGamut ($mediaIsDeviceColorGamut)"
+            "${getString(R.string.media_wide_color_gamut)} - $mediaIsGrantedGamut"
 
         // Set up security info
         val securitySELinuxQueryJob = CoroutineScope(Dispatchers.Default).async {

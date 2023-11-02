@@ -32,7 +32,7 @@
     <string name="abnormalities_signed_using_a_publickey">系统是用公钥签名的.</string>
     <string name="abnormalities_undefined_signing_key">构建标记中不存在签名密钥标记.</string>
     <string name="abnormalities_environment_broken">系统环境损坏.</string>
-    <string name="github">基于 GPL-3.0 证书开源.\n版权所有 © AkaneTan 2023</string>
+    <string name="github">基于 GPL-3.0 证书开源.\n版权所有 © AkaneTan, 123Duo3 2023</string>
     <string name="normal_title">未找到异常.</string>
     <string name="normal_summary">你的系统是正常的.</string>
     <string name="notice_title">找到可疑的痕迹.</string>

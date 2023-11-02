@@ -41,5 +41,5 @@ android {
 }
 
 dependencies {
-    implementation("com.google.android.material:material:1.11.0-beta01")
+    implementation("com.google.android.material:material:1.10.0")
 }

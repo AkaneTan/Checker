@@ -231,7 +231,7 @@ fun ContentList(
     )
     val universalityInfo = CheckerInfo(
         stringResource(id = R.string.universality),
-        R.drawable.ic_hexagon_24dp,
+        R.drawable.ic_extension_24dp,
         listOf(
             CheckerInfoItem(
                 stringResource(id = R.string.universality_treble_support),

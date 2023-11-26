@@ -32,7 +32,7 @@
     <string name="abnormalities_signed_using_a_publickey">Your build is signed using a public key.</string>
     <string name="abnormalities_undefined_signing_key">Your build tag doesn\'t contain a signing key.</string>
     <string name="abnormalities_environment_broken">Your system environment is broken.</string>
-    <string name="github">Open-sourced under GPL-3.0.\nCopyright © AkaneTan, 123Duo3 2023</string>
+    <string name="github">Open-sourced under GPL-3.0.\nCopyright © 2023 AkaneTan, 123Duo3</string>
     <string name="normal_title">No abnormalities found.</string>
     <string name="normal_summary">You\'re running a sane build.</string>
     <string name="notice_title">Suspicious traces found.</string>

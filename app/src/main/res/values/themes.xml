@@ -1,26 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Checker" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">@bool/lightStatusBarContent</item>
-        <item name="fontFamily">sans-serif</item>
-        <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
-    </style>
 
-    <style name="CheckerDialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
-        <item name="android:background">?attr/colorSurface</item>
-        <item name="dialogCornerRadius">8dp</item>
-    </style>
-
-    <style name="OverflowMenu" parent="Widget.Material3.PopupMenu.Overflow">
-        <item name="android:windowDisablePreview">true</item>
-        <item name="overlapAnchor">false</item>
-        <item name="android:dropDownVerticalOffset">5.0dp</item>
-        <!--<item name="android:popupBackground">#FFF</item>-->
-    </style>
-
-    <style name="Theme.Checker" parent="Base.Theme.Checker" />
+    <style name="Theme.Checker" parent="Theme.Material3.DayNight.NoActionBar" />
 </resources>

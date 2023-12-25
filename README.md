@@ -1,8 +1,7 @@
 # Checker
 ![GitHub](https://img.shields.io/github/license/AkaneTan/Checker?style=flat-square&logoColor=white&labelColor=black&color=azure)
 ![GitHub tag (with filter)](https://img.shields.io/github/v/tag/AkaneTan/Checker?style=flat-square&logoColor=white&labelColor=black&color=azure)
-[![Static Badge](https://img.shields.io/badge/Telegram-Content?style=flat-square&logo=telegram&logoColor=black&color=azure)](https://t.me/AkaneFoundation)
-[![Static Badge](https://img.shields.io/badge/Matrix-Content?style=flat-square&logo=matrix&logoColor=black&color=azure)](https://matrix.to/#/#akanefoundation:matrix.org)
+[![Static Badge](https://img.shields.io/badge/Telegram-Content?style=flat-square&logo=telegram&logoColor=black&color=azure)](https://t.me/AkaneDev)
 
 A tool for ROM developers to verify the sanity of their builds.
 
